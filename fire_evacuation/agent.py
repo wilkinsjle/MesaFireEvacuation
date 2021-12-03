@@ -3,6 +3,7 @@ from typing_extensions import Self
 from mesa.space import Coordinate
 import networkx as nx
 import numpy as np
+import typing
 from enum import IntEnum
 from mesa import Agent
 from copy import deepcopy
@@ -381,7 +382,7 @@ class Human(Agent):
                 self.model.grid.place_agent(sight_object, tile)
 
     # A strange implementation of ray-casting, using Bresenham's Line Algorithm, which takes into account smoke and visibility of objects
-    def get_visible_tiles(self) -> tuple[Coordinate, tuple[Agent]]:
+    def get_visible_tiles(self) -> typing.Tuple[Coordinate, typing.Tuple[Agent]]:
         neighborhood = self.model.grid.get_neighborhood(
             self.pos, moore=True, include_center=True, radius=self.vision
         )
@@ -719,7 +720,7 @@ class Human(Agent):
                 f"Failed to get next location: {e}\nPath: {path},\nlen: {length},\nSpeed: {self.speed}"
             )
 
-    def get_path(self, graph, target, include_target=True) -> list[Coordinate]:
+    def get_path(self, graph, target, include_target=True) -> typing.List[Coordinate]:
         path = []
         visible_tiles_pos = [pos for pos, _ in self.visible_tiles]
 
